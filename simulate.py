@@ -51,6 +51,29 @@ def main():
     BEEP4 = pygame.mixer.Sound('beep4.ogg')
 
 
+    #실행시 사용할 변수 초기화
+    pattern = [] # 색깔 패턴
+    currentStep = 0 # 눌러야 할 색깔
+    lastClickTime = 0 # 마지막으로 버튼을 누른 시간 -> 이 시간부터 특정 시간을 초과하면 time out
+    score = 0
+
+    # wFI -> False 시뮬레이트의 패턴을 보여주는 모드
+    # wFI -> True  패턴을 보여준 후 플레이어의 버튼 클릭을 기다리는 모드
+    waitingForInput = False
+
+
+    while True: # 시뮬레이트를 위한 루프
+        clickedButton = None # 클릭된 버튼을 None으로 초기화
+        DISPLAYSURF.fill(bgColor)
+        drawButtons() # 4개의 색깔 버튼을 그리는 함수 호출
+
+        # 점수 표시를 위한 텍스트 생성 <----
+        scoreSurf = BASICFONT.render('Score:' + str(score), 1, WHITE) # 색깔을 맞출시 점수를 올려야 하기에 loop문 안에서 렌더 함수 호출
+        scoreRect = scoreSurf.get_rect()
+        scoreRect.topleft = (WINDOWWIDTH - 100, 10)
+        DISPLAYSURF.blit(scoreSurf, scoreRect)
+        DISPLAYSURF.blit(infoSurf, infoRect)
+        # ---->
 
 
 
